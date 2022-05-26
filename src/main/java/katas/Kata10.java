@@ -63,9 +63,12 @@ public class Kata10 {
 
         return lists
                 .stream()
-                .map( m -> ImmutableMap.of("name", m.get("name"), "videos", videos
+                .map( element -> ImmutableMap.of("name", element.get("name"), "videos", videos
                                 .stream()
-                                .filter(video -> video.get("listId").equals(m.get("id"))).map(video -> ImmutableMap.of("id", video.get("id"), "title", video.get("title"))).collect(Collectors.toList()))
+                                .filter(movie -> movie.get("listId")
+                                        .equals(element.get("id")))
+                        .map(movie -> ImmutableMap.of("id", movie.get("id"), "title", movie.get("title")))
+                        .collect(Collectors.toList()))
         ).collect(Collectors.toList());
     }
 }
